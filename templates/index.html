@@ -36,7 +36,7 @@
         <div class="grid">
             {% for article in articles %}
             <a href="{{ article.url }}" class="card">
-                <img src="https://images.unsplash.com/photo-1558403194-611308249627?auto=format&fit=crop&w=600&q=80" alt="{{ article.title }}">
+                <img src="{{ article.image_url }}" alt="{{ article.title }}">
                 <div class="card-content">
                     <div class="card-date">{{ article.date }}</div>
                     <div class="card-title">{{ article.title }}</div>

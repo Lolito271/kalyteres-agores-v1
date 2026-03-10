@@ -55,7 +55,8 @@ def build_site():
             articles.append({
                 'title': post['title'],
                 'url': output_name,
-                'date': post['date']
+                'date': post['date'],
+                'image_url': post.get('image_url', '')
             })
 
     # Sort articles by date descending

@@ -49,12 +49,24 @@ def generate_blog_post():
        - Συμπέρασμα.
     4. SEO: Χρησιμοποίησε σχετικές λέξεις-κλειδιά.
     5. Affiliate Links: Εκεί που προτείνεις προϊόντα, βάλε placeholders όπως [LINK_HERE].
+    6. ΑΠΑΓΟΡΕΥΣΕΙΣ:
+       - ΜΗΝ αναφέρεις ενότητα σχολίων ή "γράψτε στα σχόλια" (δεν υπάρχει τέτοια λειτουργία).
+       - ΜΗΝ χρησιμοποιείς placeholders όπως [ΕΔΩ ΜΠΑΙΝΕΙ Η ΦΩΤΟΓΡΑΦΙΑ].
+       - ΜΗΝ βάζεις "Σημειώσεις για τον συντάκτη".
     
     Μην βάλεις Frontmatter (---), μόνο το κυρίως κείμενο σε Markdown.
     """
     
     response_content = model.generate_content(prompt_content)
     main_content = response_content.text.strip()
+
+    # Step 2.5: Generate image keyword based on title
+    prompt_image = f"Δώσε μου μία μόνο λέξη στα Αγγλικά (keyword) που να περιγράφει το θέμα του άρθρου '{title}' για να βρω μια σχετική εικόνα στο Unsplash. Μόνο τη λέξη."
+    response_image = model.generate_content(prompt_image)
+    image_keyword = response_image.text.strip().lower()
+    image_url = f"https://images.unsplash.com/photo-1558403194-611308249627?auto=format&fit=crop&w=1200&q=80" # Default
+    if image_keyword:
+        image_url = f"https://source.unsplash.com/featured/1200x800?{image_keyword}"
 
     # Step 3: Save to file
     date_str = datetime.now().strftime("%Y-%m-%d")
@@ -81,7 +93,7 @@ def generate_blog_post():
     full_markdown = f"""---
 title: "{title}"
 date: "{date_str}"
-image_url: "https://images.unsplash.com/photo-1558403194-611308249627?auto=format&fit=crop&w=1200&q=80"
+image_url: "{image_url}"
 ---
 
 {main_content}
