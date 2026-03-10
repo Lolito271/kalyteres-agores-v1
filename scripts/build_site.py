@@ -12,6 +12,13 @@ def build_site():
     if not os.path.exists("public"):
         os.makedirs("public")
     
+    # Copy Assets
+    import shutil
+    if os.path.exists("assets"):
+        if os.path.exists("public/assets"):
+            shutil.rmtree("public/assets")
+        shutil.copytree("assets", "public/assets")
+    
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('article.html')
 
