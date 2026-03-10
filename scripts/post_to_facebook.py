@@ -27,33 +27,26 @@ def post_to_facebook():
         config = yaml.safe_load(f)
     
     site_url = config.get('site_url', 'https://kalyteres-agores.gr')
-    # Generate link (assuming slug-based naming)
-    # The build script uses the base name of the md file
     slug = os.path.basename(article_path).replace('.md', '.html')
     link = f"{site_url}/{slug}"
 
-    # Get credentials from environment
-    page_id = os.environ.get('FB_PAGE_ID')
-    access_token = os.environ.get('FB_PAGE_ACCESS_TOKEN')
+    # Get webhook URL from environment
+    webhook_url = os.environ.get('MAKE_WEBHOOK_URL')
 
-    if not page_id or not access_token:
-        print("Facebook credentials not found in environment variables.")
+    if not webhook_url:
+        print("Make.com Webhook URL not found in environment variables.")
         return
 
-    message = f"🚀 {title}\n\nΔιαβάστε το νέο μας άρθρο εδώ: {link}"
-    
-    url = f"https://graph.facebook.com/v22.0/{page_id}/feed"
     payload = {
-        'message': message,
-        'link': link,
-        'access_token': access_token
+        'title': title,
+        'link': link
     }
 
-    response = requests.post(url, data=payload)
+    response = requests.post(webhook_url, json=payload)
     if response.status_code == 200:
-        print(f"Successfully posted to Facebook: {response.json()}")
+        print(f"Successfully sent to Make.com: {response.text}")
     else:
-        print(f"Failed to post to Facebook: {response.text}")
+        print(f"Failed to send to Make.com: {response.text}")
 
 if __name__ == "__main__":
     post_to_facebook()
