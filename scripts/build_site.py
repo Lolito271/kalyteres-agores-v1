@@ -16,8 +16,14 @@ def build_site():
     import shutil
     if os.path.exists("assets"):
         if os.path.exists("public/assets"):
-            shutil.rmtree("public/assets")
-        shutil.copytree("assets", "public/assets")
+            try:
+                shutil.rmtree("public/assets")
+            except Exception as e:
+                print(f"Warning: Could not remove public/assets: {e}")
+        try:
+            shutil.copytree("assets", "public/assets", dirs_exist_ok=True)
+        except Exception as e:
+            print(f"Warning: Could not copy assets: {e}")
     
     # Create CNAME file
     with open("public/CNAME", "w") as f:
