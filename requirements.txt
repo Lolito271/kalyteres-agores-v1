@@ -1,0 +1,6 @@
+markdown
+google-generativeai
+python-frontmatter
+jinja2
+requests
+pyyaml

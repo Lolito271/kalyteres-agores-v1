@@ -1,0 +1,22 @@
+site:
+  name: "Καλύτερες Αγορές"
+  url: "https://kalyteres-agores.gr"
+  description: "Οδηγός έξυπνων αγορών και προσφορών στην Ελλάδα."
+
+affiliate:
+  network: "linkwise"
+  id: "YOUR_AFFILIATE_ID_HERE"
+
+content:
+  language: "el"
+  niche: "Home, Technology, Savings, Smart Life"
+  target_categories: 
+    - "Έξυπνο Σπίτι"
+    - "Gadgets & Τεχνολογία"
+    - "Εξοικονόμηση Ενέργειας"
+    - "Οικιακές Συσκευές"
+  articles_per_day: 1
+
+ai:
+  provider: "google"
+  model: "gemini-flash-latest"

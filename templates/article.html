@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - {{ site_name }}</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --accent: #f97316;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        header { background: white; padding: 20px 0; border-bottom: 1px solid #e2e8f0; sticky; top: 0; z-index: 10; }
+        .logo { font-size: 28px; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        article { background: white; margin: 40px 0; padding: 40px; border-radius: 20px; shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        h1 { font-size: 3rem; margin-bottom: 0.5rem; color: #0f172a; }
+        .article-meta { color: #64748b; margin-bottom: 2rem; }
+        .article-content img { width: 100%; border-radius: 15px; margin-bottom: 2rem; }
+        .article-content h2 { color: #0f172a; margin-top: 2.5rem; }
+        .affiliate-link { display: block; background: var(--accent); color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: 800; margin: 2rem 0; transition: transform 0.2s; }
+        .affiliate-link:hover { transform: scale(1.02); }
+        footer { text-align: center; padding: 40px; border-top: 1px solid #e2e8f0; margin-top: 40px; color: #64748b; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Καλύτερες<span>Αγορές</span></a>
+        </div>
+    </header>
+
+    <main class="container">
+        <article>
+            <div class="article-meta">{{ date }}</div>
+            <h1>{{ title }}</h1>
+            <div class="article-content">
+                <img src="{{ image_url }}" alt="{{ title }}">
+                {{ content }}
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 kalyteres-agores.gr - Ο δικός σας οδηγός για έξυπνες αγορές.</p>
+        </div>
+    </footer>
+</body>
+</html>
