@@ -19,6 +19,10 @@ def build_site():
             shutil.rmtree("public/assets")
         shutil.copytree("assets", "public/assets")
     
+    # Create CNAME file
+    with open("public/CNAME", "w") as f:
+        f.write("kalyteres-agores.gr")
+    
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('article.html')
 
