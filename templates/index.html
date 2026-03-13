@@ -4,50 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site_name }} - {{ description }}</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --primary: #1e3a8a; --accent: #f97316; --bg: #f8fafc; --text: #1e293b; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        header { background: white; padding: 40px 0; border-bottom: 1px solid #e2e8f0; text-align: center; }
-        .logo { font-size: 42px; font-weight: 800; color: var(--primary); text-decoration: none; }
-        .logo span { color: var(--accent); }
-        .hero { padding: 60px 0; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); transition: transform 0.2s; text-decoration: none; color: inherit; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-content { padding: 20px; }
-        .card-date { color: #64748b; font-size: 0.9rem; margin-bottom: 10px; }
-        .card-title { font-size: 1.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
-        footer { text-align: center; padding: 60px; color: #64748b; }
-    </style>
+    <link rel="stylesheet" href="{{ asset_path }}/css/style.css?v=1.0.3">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="container">
-            <a href="/" class="logo">Καλύτερες<span>Αγορές</span></a>
-            <p>{{ description }}</p>
+                <img src="{{ asset_path }}/images/logo-icon.png" alt="Logo" class="logo-icon">
+                <div class="logo">Καλύτερες<span>Αγορές</span></div>
+            </a>
+            <nav class="main-nav">
+                {% for cat in categories %}
+                <a href="{{ cat.url }}">{{ cat.name }}</a>
+                {% endfor %}
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <div class="grid">
-            {% for article in articles %}
-            <a href="{{ article.url }}" class="card">
-                <img src="{{ article.image_url }}" alt="{{ article.title }}">
-                <div class="card-content">
-                    <div class="card-date">{{ article.date }}</div>
-                    <div class="card-title">{{ article.title }}</div>
-                </div>
-            </a>
-            {% endfor %}
+    <main>
+        {% if articles %}
+        <section class="hero">
+            <div class="container">
+                <a href="{{ article_url_prefix }}{{ articles[0].url }}" class="hero-card">
+                    <img src="{{ articles[0].image_url }}" alt="{{ articles[0].title }}" class="hero-image">
+                    <div class="hero-content">
+                        <div class="badge">{{ articles[0].category }}</div>
+                        <h1 class="hero-title">{{ articles[0].title }}</h1>
+                        <p class="hero-excerpt">Ανακαλύψτε τις πιο έξυπνες και ενημερωμένες λύσεις για την καθημερινότητά σας. Διαβάστε την πλήρη ανάλυση και δείτε γιατί αυτή η επιλογή ξεχωρίζει.</p>
+                        <div class="card-date">{{ articles[0].date }}</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <div class="container">
+            <h2 class="section-title">Όλα τα Άρθρα</h2>
+            <div class="grid">
+                {% for article in articles[1:] if articles|length > 1 %}
+                <a href="{{ article_url_prefix }}{{ article.url }}" class="card">
+                    <div class="card-img-wrap">
+                        <img src="{{ article.image_url }}" alt="{{ article.title }}">
+                    </div>
+                    <div class="card-content">
+                        <div class="badge-small">{{ article.category }}</div>
+                        <div class="card-date">{{ article.date }}</div>
+                        <h3 class="card-title">{{ article.title }}</h3>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 kalyteres-agores.gr</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="/" class="footer-logo">Καλύτερες<span>Αγορές</span></a>
+                    <p class="footer-text">Ο δικός σας έγκυρος οδηγός για έξυπνες και ενημερωμένες αγορές στην Ελλάδα. Αναλύουμε, δοκιμάζουμε και σας προτείνουμε μόνο ό,τι πραγματικά αξίζει.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Κατηγορίες</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Gadgets & Τεχνολογία</a></li>
+                        <li><a href="#">Σπίτι & Διακόσμηση</a></li>
+                        <li><a href="#">Υγεία & Ευεξία</a></li>
+                        <li><a href="#">Αθλητισμός & Fitness</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Ακολουθήστε μας</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.facebook.com/profile.php?id=61582195138065" target="_blank" rel="noopener">Facebook Page</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 kalyteres-agores.gr - All Rights Reserved.
+            </div>
+        </div>
     </footer>
 </body>
 </html>
