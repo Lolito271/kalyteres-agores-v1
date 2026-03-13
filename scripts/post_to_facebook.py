@@ -2,6 +2,21 @@ import requests
 import os
 import frontmatter
 import yaml
+import re
+
+def slugify(text):
+    text = text.lower()
+    greek_map = {
+        'α': 'a', 'β': 'b', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'ζ': 'z', 'η': 'i', 'θ': 'th',
+        'ι': 'i', 'κ': 'k', 'λ': 'l', 'μ': 'm', 'ν': 'n', 'ξ': 'x', 'ο': 'o', 'π': 'p',
+        'ρ': 'r', 'σ': 's', 'τ': 't', 'υ': 'y', 'φ': 'f', 'χ': 'ch', 'ψ': 'ps', 'ω': 'o',
+        'ς': 's', 'ά': 'a', 'έ': 'e', 'ή': 'i', 'ί': 'i', 'ό': 'o', 'ύ': 'y', 'ώ': 'o',
+        'ϊ': 'i', 'ϋ': 'y', 'ΐ': 'i', 'ΰ': 'y'
+    }
+    for g, l in greek_map.items(): text = text.replace(g, l)
+    text = re.sub(r'[^a-z0-9\s-]', '', text)
+    text = re.sub(r'[-\s]+', '-', text).strip('-')
+    return text
 
 def get_latest_article():
     content_dir = 'content'
@@ -26,9 +41,14 @@ def post_to_facebook():
     with open('config.yaml', 'r', encoding='utf-8') as f:
         config = yaml.safe_load(f)
     
-    site_url = config.get('site_url', 'https://kalyteres-agores.gr')
+    site_url = config['site']['url']
+    
+    # Extract category to match the new dynamic routing
+    category = post.get('category', 'Γενικά')
+    cat_slug = slugify(category)
     slug = os.path.basename(article_path).replace('.md', '.html')
-    link = f"{site_url}/{slug}"
+    
+    link = f"{site_url}/{cat_slug}/{slug}"
 
     # Get webhook URL from environment
     webhook_url = os.environ.get('MAKE_WEBHOOK_URL')
