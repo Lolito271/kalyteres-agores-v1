@@ -1,22 +1,129 @@
 site:
   name: "Καλύτερες Αγορές"
   url: "https://kalyteres-agores.gr"
-  description: "Οδηγός έξυπνων αγορών και προσφορών στην Ελλάδα."
+  description: "Ο κορυφαίος οδηγός σας για έξυπνες και ενημερωμένες αγορές."
 
 affiliate:
   network: "linkwise"
-  id: "YOUR_AFFILIATE_ID_HERE"
+  id: "CD28286"
+  # Smart affiliate store database with keyword tags for intelligent matching
+  # The AI will pick up to 3 stores whose tags best match the article topic
+  stores:
+    - name: "DealsShop"
+      url: "https://go.linkwi.se/z/11791-1/CD28286/?"
+      tags: ["έξυπνο σπίτι", "smart home", "gadgets", "κάμερα", "gps", "ηλεκτρονικά", "ασφάλεια", "ρομπότ", "αξεσουάρ", "εργαλεία", "κήπος", "υγεία", "γυμναστική"]
+    - name: "Kotsovolos"
+      url: "https://go.linkwi.se/z/138-1/CD28286/?"
+      tags: ["ηλεκτρονικά", "τεχνολογία", "φριτέζα", "ψυγείο", "πλυντήριο", "air fryer", "κλιματιστικό", "τηλεόραση", "laptop", "gadgets", "smart home", "ηλεκτρικές συσκευές", "οικιακές συσκευές"]
+    - name: "E-SHOP"
+      url: "https://go.linkwi.se/z/11754-1/CD28286/?"
+      tags: ["ηλεκτρονικά", "τεχνολογία", "laptop", "smartphone", "tablet", "gaming", "gadgets", "smart home", "συσκευές", "κάμερα", "ήχος", "οθόνη"]
+    - name: "Public"
+      url: "https://go.linkwi.se/z/469-2/CD28286/?"
+      tags: ["ηλεκτρονικά", "βιβλία", "gaming", "laptop", "tablet", "smartphone", "music", "gadgets", "τεχνολογία", "smart home", "ασύρματα ακουστικά"]
+    - name: "MarketPlace4u"
+      url: "https://go.linkwi.se/z/13941-3/CD28286/?"
+      tags: ["έξυπνο σπίτι", "smart home", "ηλεκτρονικά", "gadgets", "smart plug", "αυτοματισμός", "ασφάλεια σπιτιού", "τεχνολογία"]
+    - name: "Slamdunk"
+      url: "https://go.linkwi.se/z/13324-3/CD28286/?"
+      tags: ["αθλητισμός", "μπάσκετ", "τρέξιμο", "αθλητικά παπούτσια", "παπούτσια", "sneakers", "αθλητικά ρούχα", "fitness", "sport"]
+    - name: "Vactive"
+      url: "https://go.linkwi.se/z/13276-3/CD28286/?"
+      tags: ["αθλητισμός", "αθλητικά ρούχα", "fitness", "yoga", "τρέξιμο", "κολύμβηση", "γυμναστήριο", "sport", "leggings", "αθλητικά"]
+    - name: "Carelife"
+      url: "https://go.linkwi.se/z/13781-3/CD28286/?"
+      tags: ["υγεία", "ευεξία", "φαρμακείο", "συμπληρώματα", "βιταμίνες", "πρωτεΐνη", "αδυνάτισμα", "περιποίηση", "ομορφιά"]
+    - name: "HerbStore"
+      url: "https://go.linkwi.se/z/14038-3/CD28286/?"
+      tags: ["υγεία", "βότανα", "φυτικά", "φυσικά προϊόντα", "τσάι", "ευεξία", "ολιστική", "φυτοθεραπεία", "βιολογικά"]
+    - name: "Inbeverages"
+      url: "https://go.linkwi.se/z/13437-3/CD28286/?"
+      tags: ["ροφήματα", "καφές", "τσάι", "ενεργειακά", "protein shake", "συμπληρώματα", "αδυνάτισμα", "υγεία", "αθλητισμός", "ευεξία"]
+    - name: "L'ADIOPIS"
+      url: "https://go.linkwi.se/z/13910-3/CD28286/?"
+      tags: ["ομορφιά", "περιποίηση δέρματος", "αντιγήρανση", "κρέμα", "serum", "υγεία", "φροντίδα", "καλλυντικά", "skincare"]
+    - name: "LifeTree"
+      url: "https://go.linkwi.se/z/13796-3/CD28286/?"
+      tags: ["υγεία", "φυσικά προϊόντα", "βιολογικά", "βότανα", "ευεξία", "αιθέρια έλαια", "φυτοθεραπεία", "ολιστική"]
+    - name: "My Cretan Goods"
+      url: "https://go.linkwi.se/z/12587-3/CD28286/?"
+      tags: ["κρητικά", "ελληνικά προϊόντα", "ελαιόλαδο", "διατροφή", "υγεία", "βιολογικά", "μέλι", "τοπικά προϊόντα", "τρόφιμα"]
+    - name: "myGreekTaste"
+      url: "https://go.linkwi.se/z/13945-3/CD28286/?"
+      tags: ["ελληνικά τρόφιμα", "γαστρονομία", "διατροφή", "παραδοσιακά", "υγεία", "βιολογικά", "ελληνική κουζίνα", "μέλι", "ελαιόλαδο"]
+    - name: "Pharm24"
+      url: "https://go.linkwi.se/z/11388-1/CD28286/?"
+      tags: ["φαρμακείο", "υγεία", "βιταμίνες", "συμπληρώματα", "φάρμακα", "περιποίηση", "αδυνάτισμα", "ευεξία", "σώμα"]
+    - name: "Pharmacy Onlineshop"
+      url: "https://go.linkwi.se/z/11609-1/CD28286/?"
+      tags: ["φαρμακείο", "υγεία", "βιταμίνες", "συμπληρώματα", "παιδιά", "ευεξία", "καλλυντικά", "σώμα", "μαλλιά"]
+    - name: "The Body Shop"
+      url: "https://go.linkwi.se/z/11742-1/CD28286/?"
+      tags: ["ομορφιά", "καλλυντικά", "περιποίηση σώματος", "skincare", "φυσικά", "κρέμα", "αρώματα", "δώρα", "μαλλιά"]
+    - name: "24home"
+      url: "https://go.linkwi.se/z/11532-1/CD28286/?"
+      tags: ["σπίτι", "κήπος", "έπιπλα", "διακόσμηση", "κουζίνα", "μπάνιο", "στρώμα", "ύπνος", "καθαριότητα", "εξοπλισμός"]
+    - name: "DesignPlus"
+      url: "https://go.linkwi.se/z/14027-3/CD28286/?"
+      tags: ["σπίτι", "διακόσμηση", "design", "έπιπλα", "φωτιστικά", "αξεσουάρ σπιτιού", "μοντέρνο", "lifestyle"]
+    - name: "Inoxdesign"
+      url: "https://go.linkwi.se/z/13908-3/CD28286/?"
+      tags: ["σπίτι", "ανοξείδωτα", "κουζίνα", "μαγείρεμα", "μαχαιροπίρουνα", "σκεύη", "αξεσουάρ κουζίνας"]
+    - name: "Uncle George"
+      url: "https://go.linkwi.se/z/14032-3/CD28286/?"
+      tags: ["barbecue", "bbq", "ψησταριά", "κήπος", "outdoor", "camping", "σπίτι", "μαγείρεμα", "καλοκαίρι"]
+    - name: "Spitishop"
+      url: "https://go.linkwi.se/z/10814-1/CD28286/?"
+      tags: ["σπίτι", "κήπος", "ηλεκτρικές συσκευές", "εξοπλισμός κουζίνας", "οικιακός εξοπλισμός", "εργαλεία", "καθαριότητα"]
+    - name: "Autodoc"
+      url: "https://go.linkwi.se/z/13862-3/CD28286/?"
+      tags: ["αυτοκίνητο", "ανταλλακτικά", "αξεσουάρ αυτοκινήτου", "φροντίδα αυτοκινήτου", "λάδια", "φίλτρα", "ελαστικά", "μηχανή"]
+    - name: "Gatsas Jewellery"
+      url: "https://go.linkwi.se/z/14085-3/CD28286/?"
+      tags: ["κοσμήματα", "χρυσός", "ασήμι", "δαχτυλίδι", "σκουλαρίκια", "κολιέ", "βραχιόλι", "δώρο", "luxury", "lifestyle", "μόδα"]
+    - name: "Notos"
+      url: "https://go.linkwi.se/z/12471-3/CD28286/?"
+      tags: ["μόδα", "ρούχα", "lifestyle", "αξεσουάρ", "ανδρικά", "γυναικεία", "στυλ", "collection", "designer", "brand"]
+    - name: "Onlineshoes"
+      url: "https://go.linkwi.se/z/13002-3/CD28286/?"
+      tags: ["παπούτσια", "sneakers", "μποτάκια", "πέδιλα", "γυναικεία παπούτσια", "ανδρικά παπούτσια", "μόδα", "lifestyle", "casual"]
+    - name: "SHEIN"
+      url: "https://go.linkwi.se/z/13924-3/CD28286/?"
+      tags: ["μόδα", "ρούχα", "γυναικεία", "φορέματα", "μπλούζες", "τάσεις", "lifestyle", "casual", "trend", "fast fashion"]
+    - name: "Stradivarius"
+      url: "https://go.linkwi.se/z/13754-3/CD28286/?"
+      tags: ["μόδα", "γυναικεία ρούχα", "φορέματα", "μπλούζες", "παντελόνια", "lifestyle", "trend", "collection", "casual", "κομψό"]
+    - name: "Tsakiris Mallas"
+      url: "https://go.linkwi.se/z/11641-1/CD28286/?"
+      tags: ["παπούτσια", "γυναικεία παπούτσια", "τσάντες", "πέδιλα", "μποτάκια", "μόδα", "luxury", "lifestyle", "αξεσουάρ"]
+    - name: "Memorybox"
+      url: "https://go.linkwi.se/z/13486-3/CD28286/?"
+      tags: ["δώρα", "προσωποποιημένα", "t-shirts", "ρούχα", "μπλούζες", "κούπες", "αξεσουάρ", "lifestyle", "χιούμορ", "γέννηση"]
+    - name: "Myaroma"
+      url: "https://go.linkwi.se/z/13100-3/CD28286/?"
+      tags: ["αρώματα", "perfume", "αιθέρια έλαια", "ευεξία", "καλλυντικά", "skincare", "ομορφιά", "lifestyle", "δώρα"]
+    - name: "Sephora"
+      url: "https://go.linkwi.se/z/13026-3/CD28286/?"
+      tags: ["καλλυντικά", "μακιγιάζ", "ομορφιά", "skincare", "αρώματα", "περιποίηση", "lip gloss", "foundation", "lifestyle", "μόδα", "brand"]
+    - name: "Tokotoukan"
+      url: "https://go.linkwi.se/z/5-28/CD28286/?"
+      tags: ["ρούχα", "t-shirts", "μπλούζες", "custom", "χιούμορ", "μόδα", "geek", "casual", "lifestyle", "δώρα"]
 
 content:
   language: "el"
-  niche: "Home, Technology, Savings, Smart Life"
-  target_categories: 
+  niche: "Smart Life, Quality Choices, Value for Money, Home & Tech, Lifestyle & Fashion, Sports & Wellness"
+  target_categories:
     - "Έξυπνο Σπίτι"
     - "Gadgets & Τεχνολογία"
-    - "Εξοικονόμηση Ενέργειας"
-    - "Οικιακές Συσκευές"
+    - "Υγεία & Ευεξία"
+    - "Αθλητισμός"
+    - "Σπίτι & Κήπος"
+    - "Αυτοκίνητο"
+    - "Lifestyle & Μόδα"
   articles_per_day: 1
 
 ai:
   provider: "google"
   model: "gemini-flash-latest"
+
+
