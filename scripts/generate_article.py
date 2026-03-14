@@ -128,7 +128,7 @@ def generate_blog_post():
     - ΜΗΝ αναφέρεις έτη εκτός του {current_year}.
     - Στο τέλος, βάλε ΤΟΝ ΚΩΔΙΚΟ (μην τον αλλάξεις): {{LINKS_HERE}}
     
-    Εικόνα: ![Image](https://images.unsplash.com/featured/?{urllib.parse.quote(category.encode('utf-8'))})
+    Εικόνα: ![Image](https://source.unsplash.com/featured/?{urllib.parse.quote(category.encode('utf-8'))})
     """
     
     response_content = model.generate_content(prompt_content)
@@ -162,12 +162,13 @@ def generate_blog_post():
             if len(top_stores) >= 2:
                 break
     
-    # Build markdown links for selected stores
+    # Build markdown/HTML links for selected stores with target="_blank" security
     markdown_links = f"\n\n### 📦 Βρείτε τις καλύτερες επιλογές για {category}:\n\n"
     for store in top_stores:
         aff_url = store['url']
         display_name = store['name']
-        markdown_links += f"▶ **[Δείτε τις κορυφαίες επιλογές στο {display_name}]({aff_url})**\n\n"
+        # Markdown doesn't support target="_blank", using HTML for better UX & security
+        markdown_links += f"▶ <a href=\"{aff_url}\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Δείτε τις κορυφαίες επιλογές στο {display_name}</strong></a>\n\n"
     
     main_content = main_content.replace("{LINKS_HERE}", markdown_links)
 
@@ -176,7 +177,9 @@ def generate_blog_post():
     slug_val = slugify(title)
     filename = f"content/{date_str}-{slug_val}.md"
 
-    image_url = f"https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+    # Step 4: Dynamic Image Selection (Keywords-based Unsplash)
+    image_keywords = ",".join(article_tags[:3]) if article_tags else category
+    image_url = f"https://source.unsplash.com/featured/?{urllib.parse.quote(image_keywords.encode('utf-8'))}"
 
     summary_escaped = summary.replace('"', '\\"')
     article_tags_json = json.dumps(article_tags, ensure_ascii=False)
@@ -195,6 +198,15 @@ tags: {article_tags_json}
 
     with open(filename, "w", encoding="utf-8") as f:
         f.write(full_markdown)
+    
+    # Step 5: Automated Activity Logging
+    try:
+        log_url = f"https://kalyteres-agores.gr/{slugify(category)}/{slug_val}.html"
+        log_entry = f"| {date_str} | {title} | [Link]({log_url}) | ✅ Created |\n"
+        with open("automated_log.md", "a", encoding="utf-8") as log_file:
+            log_file.write(log_entry)
+    except Exception as e:
+        print(f"Warning: Could not update log: {e}")
     
     print(f"Successfully saved to {filename}")
 
