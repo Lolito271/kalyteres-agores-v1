@@ -74,6 +74,14 @@ def build_site():
                 # Convert markdown to HTML
                 html_content = markdown.markdown(post.content)
                 
+                # Global Link Behavior: Force target="_blank" and rel="noopener noreferrer" on external/affiliate links
+                # Targets http, https, and specifically common affiliate/store links
+                html_content = re.sub(
+                    r'<a\s+(?![^>]*target=)(href="https?://[^"]+")', 
+                    r'<a \1 target="_blank" rel="noopener noreferrer"', 
+                    html_content
+                )
+                
                 category = post.get('category', 'Γενικά')
                 cat_slug = slugify(category)
                 
