@@ -183,6 +183,8 @@ title: "{title}"
 date: "{date_str}"
 image_url: "{image_url}"
 category: "{category}"
+short_summary: "{summary.replace('"', '\\"')}"
+tags: {json.dumps(article_tags, ensure_ascii=False)}
 ---
 
 {main_content}
