@@ -25,6 +25,7 @@ body {
     background: var(--bg); 
     color: var(--text); 
     line-height: 1.6;
+    padding-top: 75px; /* Compansate for fixed header */
 }
 
 h1, h2, h3, .logo { 
@@ -50,7 +51,8 @@ header {
     background: var(--white); 
     padding: 12px 0; 
     border-bottom: 1px solid #e2e8f0; 
-    position: sticky; 
+    position: fixed; 
+    width: 100%;
     top: 0; 
     z-index: 1000;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
