@@ -178,13 +178,16 @@ def generate_blog_post():
 
     image_url = f"https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
 
+    summary_escaped = summary.replace('"', '\\"')
+    article_tags_json = json.dumps(article_tags, ensure_ascii=False)
+    
     full_markdown = f"""---
 title: "{title}"
 date: "{date_str}"
 image_url: "{image_url}"
 category: "{category}"
-short_summary: "{summary.replace('"', '\\"')}"
-tags: {json.dumps(article_tags, ensure_ascii=False)}
+short_summary: "{summary_escaped}"
+tags: {article_tags_json}
 ---
 
 {main_content}
