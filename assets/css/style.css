@@ -101,13 +101,29 @@ footer { background: #0f172a; color: white; padding: 80px 0 40px 0; margin-top: 
 .footer-links a:hover { color: white; }
 .footer-bottom { border-top: 1px solid #1e293b; padding-top: 40px; text-align: center; color: #64748b; font-size: 0.9rem; }
 
-@media (max-width: 900px) {
-    .hero-card { grid-template-columns: 1fr; }
-    .hero-image { height: 300px; }
-    .hero-content { padding: 30px; }
-    .hero-title { font-size: 1.8rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-    .main-nav { display: none; }
+@media (max-width: 960px) {
+    .nav-content { flex-direction: column; gap: 15px; align-items: flex-start; }
+    
+    .main-nav { 
+        display: flex; 
+        width: 100vw; 
+        margin-left: -20px; 
+        padding: 0 20px 5px 20px; 
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+        gap: 20px;
+        scrollbar-width: none; /* Hide for Firefox */
+    }
+    
+    .main-nav::-webkit-scrollbar { display: none; } /* Hide for Chrome/Safari */
+    
+    .main-nav a { 
+        white-space: nowrap; 
+        font-size: 0.9rem;
+        background: #f1f5f9;
+        padding: 6px 15px;
+        border-radius: 50px;
+    }
 }
 /* CTA Banner */
 .cta-banner {

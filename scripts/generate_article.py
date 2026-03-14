@@ -41,22 +41,57 @@ def generate_blog_post():
     genai.configure(api_key=GOOGLE_API_KEY)
     model = genai.GenerativeModel(config['ai']['model'])
 
-    # Step 1: Brainstorm
+    # Step 1: Brainstorm & Category Selection (Categorical Cycling)
     categories = config['content'].get('target_categories', ['Shopping'])
     niche = config['content'].get('niche', 'General')
-    current_year = datetime.now().year
+    now = datetime.now()
+    current_year = now.year
+    date_str_short = now.strftime("%d/%m")
     
+    # Simple Cycling: Look at existing content to pick the least recently used category
+    content_dir = "content"
+    category = categories[0]
+    if os.path.exists(content_dir):
+        files = [f for f in os.listdir(content_dir) if f.endswith(".md")]
+        if files:
+            last_categories = []
+            for f in sorted(files, reverse=True)[:10]: # Check last 10 articles
+                try:
+                    with open(os.path.join(content_dir, f), "r", encoding="utf-8") as file:
+                        c = yaml.safe_load(file.read().split('---')[1])['category']
+                        last_categories.append(c)
+                except: continue
+            
+            # Find categories not in the last few, or pick the one that appeared longest ago
+            for cat in categories:
+                if cat not in last_categories:
+                    category = cat
+                    break
+            else:
+                # If all categories were used, pick the one that was used the least recently
+                category = min(categories, key=lambda x: last_categories.index(x) if x in last_categories else -1)
+
+    # Seasonal Context injection
+    season = "Άνοιξη" if 3 <= now.month <= 5 else "Καλοκαίρι" if 6 <= now.month <= 8 else "Φθινόπωρο" if 9 <= now.month <= 11 else "Χειμώνας"
+    holidays = "Πάσχα, ανανέωση σπιτιού" if now.month == 3 or now.month == 4 else "Διακοπές, παραλία" if now.month == 6 or now.month == 7 else ""
+
     prompt_topic = f"""
-    Λειτούργησε ως έμπειρος αρχισυντάκτης.
-    Σκέψου ένα θέμα για ένα SEO-optimized άρθρο (blog post) στο niche: {niche}.
-    Κατηγορία από τη λίστα: {', '.join(categories)}.
-    Όπου χρειάζεται (π.χ. στον τίτλο) χρησιμοποίησε αποκλειστικά την τρέχουσα χρονιά ({current_year}). ΠΟΤΕ παλαιότερα έτη.
+    Λειτούργησε ως Senior SEO Specialist. 
+    Σκέψου ένα θέμα για ένα SEO-optimized άρθρο στο niche: {niche}.
+    ΚΑΤΗΓΟΡΙΑ: {category}.
+    ΠΕΡΙΟΔΟΣ: {season} {current_year} (Ημερομηνία: {date_str_short}). {holidays}
+    
+    ΟΔΗΓΙΕΣ ΤΙΤΛΟΥ (Power Words):
+    - Χρησιμοποίησε λέξεις όπως: 'Απίστευτο', 'Οικονομικό', 'Οδηγός', 'Λύση', 'Κορυφαίο', 'Που πρέπει να δείτε'.
+    - Ο τίτλος πρέπει να είναι "κλικαρίσιμος" και να υπόσχεται λύση σε πρόβλημα.
+    - Χρησιμοποίησε αποκλειστικά το έτος {current_year}.
     
     Δώσε την απάντησή σου ΜΟΝΟ σε μορφή JSON:
     {{
         "title": "Ο Τίτλος του Άρθρου",
-        "category": "Η Κατηγορία",
-        "short_summary": "Μια σύντομη περιγραφή (1 γραμμή)"
+        "category": "{category}",
+        "short_summary": "Teaser 2 προτάσεων με emojis για Facebook",
+        "tags": ["Tag1", "Tag2", "StoreNameIfRelevant"]
     }}
     """
     
@@ -66,33 +101,34 @@ def generate_blog_post():
         title = topic_data['title']
         category = topic_data['category']
         summary = topic_data['short_summary']
+        article_tags = topic_data.get('tags', [])
     except:
-        title = "Οδηγός Έξυπνων Αγορών: Ποιοτικά Gadgets για το 2026"
-        category = categories[0]
-        summary = "Βρείτε τις καλύτερες επιλογές και προσφορές στα κορυφαία καταστήματα."
+        title = f"Κορυφαίος Οδηγός Αγοράς για την {season} {current_year}: Λύσεις που Πρέπει να Δείτε"
+        category = category
+        summary = "Βρείτε τις καλύτερες επιλογές και προσφορές στα κορυφαία καταστήματα! 🚀✨"
+        article_tags = [category, "Shopping"]
         
     print(f"Θέμα: {title} | Κατηγορία: {category}")
 
-    # Step 2: Content Generation (Concise 500-700 words)
+    # Step 2: Content Generation (SEO Optimized Structure)
     prompt_content = f"""
-    Γράψε ένα ΣΥΝΤΟΜΟ, ΠΕΡΙΕΚΤΙΚΟ και ΕΓΚΥΡΟ άρθρο (500-700 λέξεις) για: '{title}'.
+    Γράψε ένα επαγγελματικό SEO άρθρο (500-700 λέξεις) για: '{title}'.
     Κατηγορία: {category}
+    Εποχή: {season}
     
-    ΠΡΟΣΟΧΗ - ΚΡΙΣΙΜΟ:
-    Η τρέχουσα χρονιά είναι το {current_year}. Απαγορεύεται αυστηρά να αναφέρεις παλαιότερα έτη όπως 2023, 2024, κλπ. σαν να είναι το παρόν. 
-    Όλες οι αναφορές σε "φέτος", "νέα μοντέλα", ή "τάσεις" πρέπει να αφορούν το {current_year}.
+    ΔΟΜΗ ΑΡΘΡΟΥ:
+    - H1 Τίτλος: {title}
+    - Εισαγωγή: Εστίασε σε ένα πρόβλημα του αναγνώστη αυτή την εποχή και δώσε τη λύση.
+    - Κυρίως Μέρος: Χρησιμοποίησε H2/H3 επικεφαλίδες και Bullet Points για εύκολη ανάγνωση.
+    - Χρησιμοποίησε Bold σε σημαντικές λέξεις.
+    - Συμπέρασμα: 1-2 παραγράφους.
+    - Internal Linking: Στο τέλος, πρόσθεσε τη φράση: "Δείτε επίσης περισσότερες προτάσεις στην κατηγορία μας [{category}](https://kalyteres-agores.gr/{slugify(category)}/)".
     
-    Άλλες Οδηγίες: 
-    - ΜΗΝ βάλεις συγκεκριμένα links προϊόντων μέσα στο κείμενο.
-    - Εστίασε σε συμβουλές αγοράς, χαρακτηριστικά και τι να προσέξει ένας αγοραστής.
-    - Χρησιμοποίησε έντονα γράμματα και punchy headings.
-    - Στο τέλος του άρθρου, βάλε ΤΟΝ ΕΞΗΣ ΚΩΔΙΚΟ (μην τον αλλάξεις): {{LINKS_HERE}}
+    ΠΡΟΣΟΧΗ:
+    - ΜΗΝ αναφέρεις έτη εκτός του {current_year}.
+    - Στο τέλος, βάλε ΤΟΝ ΚΩΔΙΚΟ (μην τον αλλάξεις): {{LINKS_HERE}}
     
-    Δομή:
-    - Εισαγωγή 100 λέξεις.
-    - 3-4 βασικά σημεία προσοχής (Short paragraphs).
-    - Συμπέρασμα 100 λέξεις.
-    - Εικόνα: ![Image](https://images.unsplash.com/featured/?{urllib.parse.quote(category.encode('utf-8'))})
+    Εικόνα: ![Image](https://images.unsplash.com/featured/?{urllib.parse.quote(category.encode('utf-8'))})
     """
     
     response_content = model.generate_content(prompt_content)
