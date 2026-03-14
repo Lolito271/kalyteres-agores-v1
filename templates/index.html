@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{{ site_name }} - {{ description }}</title>
-    <link rel="stylesheet" href="{{ asset_path }}/css/style.css?v=1.0.6">
+    <link rel="stylesheet" href="{{ asset_path }}/css/style.css?v=1.1.0">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -27,6 +27,7 @@
         <section class="hero">
             <div class="container">
                 <a href="{{ article_url_prefix }}{{ articles[0].url }}" class="hero-card">
+                    <div class="hero-badge-special">ΕΠΙΛΟΓΗ ΜΑΣ</div>
                     <img src="{{ articles[0].image_url }}" alt="{{ articles[0].title }}" class="hero-image">
                     <div class="hero-content">
                         <div class="badge">{{ articles[0].category }}</div>
@@ -81,6 +82,9 @@
                         <li><a href="https://www.facebook.com/profile.php?id=61582195138065" target="_blank" rel="noopener">Facebook Page</a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="footer-disclosure">
+                Συμμετέχουμε σε προγράμματα affiliate και ενδέχεται να κερδίσουμε προμήθεια από τις αγορές σας, χωρίς καμία επιπλέον επιβάρυνση για εσάς.
             </div>
             <div class="footer-bottom">
                 &copy; 2026 kalyteres-agores.gr - All Rights Reserved.
