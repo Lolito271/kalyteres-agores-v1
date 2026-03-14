@@ -62,9 +62,9 @@ def post_to_facebook():
         'link': link,
         'teaser': post.get('short_summary', ''),
         'image_url': post.get('image_url', ''),
-        'date': post.get('date', '').isoformat() if post.get('date') else '',
+        'date': str(post.get('date', '')),
         'author': post.get('author', ''),
-        'tags': ', '.join(post.get('tags', []))
+        'tags': ', '.join(post.get('tags', [])) if isinstance(post.get('tags'), list) else str(post.get('tags', ''))
     }
 
     response = requests.post(webhook_url, json=payload)
