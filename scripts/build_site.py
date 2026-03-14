@@ -29,17 +29,16 @@ def slugify(text):
 
 def build_site():
     if os.path.exists("public"):
-        try:
-            # We don't rmtree the whole public to keep .git if it's there
-            for item in os.listdir("public"):
-                if item == ".git": continue
-                path = os.path.join("public", item)
+        for item in os.listdir("public"):
+            if item == ".git": continue
+            path = os.path.join("public", item)
+            try:
                 if os.path.isdir(path):
-                    shutil.rmtree(path)
+                    shutil.rmtree(path, ignore_errors=True)
                 else:
                     os.remove(path)
-        except Exception as e:
-            print(f"Warning during cleanup: {e}")
+            except Exception as e:
+                print(f"Skipping {item} due to lock/error: {e}")
     else:
         os.makedirs("public")
     
