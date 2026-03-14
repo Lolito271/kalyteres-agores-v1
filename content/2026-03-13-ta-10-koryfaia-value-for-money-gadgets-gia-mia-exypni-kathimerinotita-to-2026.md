@@ -1,8 +1,8 @@
 ---
-title: "Τα 10 Κορυφαία Value-for-Money Gadgets για μια Έξυπνη Καθημερινότητα το 2026"
-date: "2026-03-13"
-image_url: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
-category: "Gadgets & Τεχνολογία"
+category: Gadgets & Τεχνολογία
+date: '2026-03-13'
+image_url: https://source.unsplash.com/featured/?Gadgets%20%26%20%CE%A4%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1
+title: Τα 10 Κορυφαία Value-for-Money Gadgets για μια Έξυπνη Καθημερινότητα το 2026
 ---
 
 ![Image](https://images.unsplash.com/featured/?Gadgets%20%26%20%CE%A4%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1)
@@ -52,5 +52,3 @@ category: "Gadgets & Τεχνολογία"
 ▶ **[Δείτε τις κορυφαίες επιλογές στο E-SHOP](https://go.linkwi.se/z/11754-1/CD28286/?)**
 
 ▶ **[Δείτε τις κορυφαίες επιλογές στο Public](https://go.linkwi.se/z/469-2/CD28286/?)**
-
-
