@@ -126,7 +126,7 @@ def generate_blog_post():
     
     ΠΡΟΣΟΧΗ:
     - ΜΗΝ αναφέρεις έτη εκτός του {current_year}.
-    - Στο τέλος, βάλε ΤΟΝ ΚΩΔΙΚΟ (μην τον αλλάξεις): {LINKS_HERE}
+    - Στο τέλος πρόσθεσε προτάσεις αγοράς προϊόντων σχετικών με το θέμα.
     """
     
     response_content = model.generate_content(prompt_content)
