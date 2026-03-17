@@ -51,7 +51,10 @@
                     <div class="card-content">
                         <div class="badge-small">{{ article.category }}</div>
                         <div class="card-date">{{ article.date }}</div>
-                        <h3 class="card-title">{{ article.title }}</h3>
+                        <h3 class="card-title">
+                            {% if article.type == 'discovery' %}<span style="color: var(--accent);">[Discovery]</span> {% endif %}
+                            {{ article.title }}
+                        </h3>
                     </div>
                 </a>
                 {% endfor %}

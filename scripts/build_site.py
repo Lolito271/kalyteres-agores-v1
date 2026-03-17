@@ -87,12 +87,29 @@ def build_site():
                 output_name = f"{article_slug}.html"
                 relative_url = f"{cat_slug}/{output_name}"
                 
-                final_html = template.render(
+                # Select template based on page type
+                page_type = post.get('type', 'article')
+                if page_type == 'discovery':
+                    active_template = env.get_template('discovery.html')
+                else:
+                    active_template = env.get_template('article.html')
+                
+                final_html = active_template.render(
                     title=post['title'],
                     date=post['date'],
                     category=category,
                     image_url=post.get('image_url', ''),
                     content=html_content,
+                    # Discovery specific data
+                    type=page_type,
+                    short_summary=post.get('short_summary', ''),
+                    top_pick=post.get('top_pick'),
+                    value_pick=post.get('value_pick'),
+                    budget_pick=post.get('budget_pick'),
+                    products=post.get('products', []),
+                    faq=post.get('faq', []),
+                    related_pages=post.get('related_pages', []),
+                    # Global data
                     site_name=config['site']['name'],
                     description=config['site']['description'],
                     site_url=config['site']['url'],
@@ -108,7 +125,8 @@ def build_site():
                     'url': relative_url,
                     'date': post['date'],
                     'category': category,
-                    'image_url': post.get('image_url', '')
+                    'image_url': post.get('image_url', ''),
+                    'type': page_type
                 })
             except Exception as e:
                 print(f"Error processing {filename}: {e}")

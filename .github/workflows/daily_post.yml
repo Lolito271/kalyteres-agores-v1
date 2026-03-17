@@ -10,7 +10,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Essential for push operations
     steps:
       - name: Checkout
         uses: actions/checkout@v4
