@@ -126,9 +126,7 @@ def generate_blog_post():
     
     ΠΡΟΣΟΧΗ:
     - ΜΗΝ αναφέρεις έτη εκτός του {current_year}.
-    - Στο τέλος, βάλε ΤΟΝ ΚΩΔΙΚΟ (μην τον αλλάξεις): {{LINKS_HERE}}
-    
-    Εικόνα: ![Image](https://images.unsplash.com/featured/?{urllib.parse.quote(category.encode('utf-8'))})
+    - Στο τέλος, βάλε ΤΟΝ ΚΩΔΙΚΟ (μην τον αλλάξεις): {LINKS_HERE}
     """
     
     response_content = model.generate_content(prompt_content)
