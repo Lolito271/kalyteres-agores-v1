@@ -48,18 +48,19 @@ def post_to_facebook():
     cat_slug = slugify(category)
     slug = os.path.basename(article_path).replace('.md', '.html')
     
-    link = f"{site_url}/{cat_slug}/{slug}"
-
+    print(f"DEBUG: Processing article: {title}")
+    
+    # Secure link construction (no double slashes)
+    link = f"{site_url.rstrip('/')}/{cat_slug}/{slug}"
+    print(f"DEBUG: Constructed Facebook Link: {link}")
+    
     # Get webhook URL from environment
     webhook_url = os.environ.get('MAKE_WEBHOOK_URL')
 
     if not webhook_url:
-        print("Make.com Webhook URL not found in environment variables.")
+        print("ERROR: MAKE_WEBHOOK_URL not found.")
         return
 
-    print(f"Preparing payload for Facebook: {title}")
-    print(f"Constructed Link: {link}")
-    
     payload = {
         'title': title,
         'link': link,
@@ -71,14 +72,15 @@ def post_to_facebook():
     }
 
     try:
-        response = requests.post(webhook_url, json=payload, timeout=10)
-        print(f"Status Code: {response.status_code}")
+        print("DEBUG: Sending payload to Make.com...")
+        response = requests.post(webhook_url, json=payload, timeout=15)
+        print(f"DEBUG: Status Code: {response.status_code}")
         if response.status_code == 200:
-            print(f"Successfully sent to Make.com: {response.text}")
+            print(f"SUCCESS: Sent to Facebook via Make.com. Response: {response.text}")
         else:
-            print(f"Failed to send to Make.com. Status: {response.status_code}, Response: {response.text}")
+            print(f"FAILED: status {response.status_code}, Response: {response.text}")
     except Exception as e:
-        print(f"Error during Facebook posting: {e}")
+        print(f"EXCEPTION: {str(e)}")
 
 if __name__ == "__main__":
     post_to_facebook()
