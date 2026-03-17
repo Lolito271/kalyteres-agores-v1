@@ -176,7 +176,17 @@ def generate_blog_post():
     slug_val = slugify(title)
     filename = f"content/{date_str}-{slug_val}.md"
 
-    image_url = f"https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+    # Step 4: Professional Image Generation (Unique per article)
+    try:
+        # Use a title-based query + unique signature to ensure unique and relevant images
+        clean_title = re.sub(r'[^a-zA-Z0-9\s]', '', slugify(title).replace('-', ' '))
+        # Adding a timestamp-based signature (sig) to force Unsplash to give a fresh image
+        sig = int(datetime.now().timestamp())
+        image_url = f"https://images.unsplash.com/featured/1600x900/?{urllib.parse.quote(clean_title)},product,premium&sig={sig}"
+    except Exception as e:
+        print(f"Image generation error: {e}")
+        # Fallback to category featured image
+        image_url = f"https://images.unsplash.com/featured/1600x900/?{urllib.parse.quote(category.encode('utf-8'))},product"
 
     summary_escaped = summary.replace('"', '\\"')
     article_tags_json = json.dumps(article_tags, ensure_ascii=False)

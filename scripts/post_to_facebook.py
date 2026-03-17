@@ -57,6 +57,9 @@ def post_to_facebook():
         print("Make.com Webhook URL not found in environment variables.")
         return
 
+    print(f"Preparing payload for Facebook: {title}")
+    print(f"Constructed Link: {link}")
+    
     payload = {
         'title': title,
         'link': link,
@@ -67,11 +70,15 @@ def post_to_facebook():
         'tags': ', '.join(post.get('tags', [])) if isinstance(post.get('tags'), list) else str(post.get('tags', ''))
     }
 
-    response = requests.post(webhook_url, json=payload)
-    if response.status_code == 200:
-        print(f"Successfully sent to Make.com: {response.text}")
-    else:
-        print(f"Failed to send to Make.com: {response.text}")
+    try:
+        response = requests.post(webhook_url, json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        if response.status_code == 200:
+            print(f"Successfully sent to Make.com: {response.text}")
+        else:
+            print(f"Failed to send to Make.com. Status: {response.status_code}, Response: {response.text}")
+    except Exception as e:
+        print(f"Error during Facebook posting: {e}")
 
 if __name__ == "__main__":
     post_to_facebook()
