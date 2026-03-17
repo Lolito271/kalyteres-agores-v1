@@ -1,7 +1,7 @@
 ---
 title: "Απίστευτο & Οικονομικό: Ο Κορυφαίος Οδηγός 2026 για να Φέρεις το Γυμναστήριο στο Σπίτι σου Πριν το Πάσχα"
 date: "2026-03-14"
-image_url: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+image_url: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=1200"
 category: "Αθλητισμός"
 short_summary: "Θέλεις να προετοιμαστείς για το Πάσχα με την πιο value-for-money ανανέωση; 🏋️‍♂️ Ανακάλυψε τις κορυφαίες λύσεις για home gym που θα μεταμορφώσουν την προπόνησή σου το 2026 χωρίς να ξοδέψεις μια περιουσία! ✨"
 tags: ["Home Gym", "Fitness 2026", "Spring Wellness", "Οικονομικές Λύσεις", "Smart Life"]

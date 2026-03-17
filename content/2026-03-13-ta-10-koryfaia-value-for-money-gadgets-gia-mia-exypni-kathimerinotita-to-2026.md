@@ -1,7 +1,7 @@
 ---
 title: "Τα 10 Κορυφαία Value-for-Money Gadgets για μια Έξυπνη Καθημερινότητα το 2026"
 date: "2026-03-13"
-image_url: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+image_url: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80&w=1200"
 category: "Gadgets & Τεχνολογία"
 ---
 

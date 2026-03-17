@@ -1,7 +1,7 @@
 ---
 title: "Κορυφαίος Οδηγός Ευεξίας 2026: Η Απίστευτη και Οικονομική Λύση για Ανανέωση Σπιτιού και Σώματος πριν το Πάσχα που Πρέπει να Δείτε"
 date: "2026-03-14"
-image_url: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+image_url: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200"
 category: "Υγεία & Ευεξία"
 ---
 

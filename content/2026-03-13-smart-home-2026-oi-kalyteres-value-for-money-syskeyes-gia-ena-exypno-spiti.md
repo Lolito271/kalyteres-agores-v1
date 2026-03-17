@@ -1,7 +1,7 @@
 ---
 title: "Smart Home 2026: Οι Καλύτερες Value for Money Συσκευές για ένα Έξυπνο Σπίτι"
 date: "2026-03-13"
-image_url: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=1200"
+image_url: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=1200"
 category: "Έξυπνο Σπίτι"
 ---
 
