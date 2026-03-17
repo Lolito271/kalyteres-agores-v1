@@ -5,7 +5,7 @@ image_url: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=fo
 category: "Gadgets & Τεχνολογία"
 ---
 
-![Image](https://images.unsplash.com/featured/?Gadgets%20%26%20%CE%A4%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1)
+
 
 # Τα 10 Κορυφαία Value-for-Money Gadgets για μια Έξυπνη Καθημερινότητα το 2026
 
