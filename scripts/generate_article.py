@@ -178,11 +178,12 @@ def generate_blog_post():
 
     # Step 4: Professional Image Generation (Unique per article)
     try:
-        # Use a title-based query + unique signature to ensure unique and relevant images
+        # Use a title-based query + unique signature + professional keywords
         clean_title = re.sub(r'[^a-zA-Z0-9\s]', '', slugify(title).replace('-', ' '))
-        # Adding a timestamp-based signature (sig) to force Unsplash to give a fresh image
+        # Adding a timestamp-based signature (sig) and studio keywords for Backup 1 quality
         sig = int(datetime.now().timestamp())
-        image_url = f"https://images.unsplash.com/featured/1600x900/?{urllib.parse.quote(clean_title)},product,premium&sig={sig}"
+        query = f"{urllib.parse.quote(clean_title)},minimalist,studio,product,high-end,8k"
+        image_url = f"https://images.unsplash.com/featured/1600x900/?{query}&sig={sig}"
     except Exception as e:
         print(f"Image generation error: {e}")
         # Fallback to category featured image
