@@ -23,17 +23,19 @@
     </header>
 
     <main>
-        {% if articles %}
+        {% if posts %}
         <section class="hero">
             <div class="container">
-                <a href="{{ article_url_prefix }}{{ articles[0].url }}" class="hero-card">
+                <a href="{{ posts[0].url }}" class="hero-card">
                     <div class="hero-badge-special">ΕΠΙΛΟΓΗ ΜΑΣ</div>
-                    <img src="{{ articles[0].image_url }}" alt="{{ articles[0].title }}" class="hero-image">
+                    <div class="hero-image-wrap">
+                        <img src="{{ posts[0].image_url }}" alt="{{ posts[0].title }}" class="hero-image">
+                    </div>
                     <div class="hero-content">
-                        <div class="badge">{{ articles[0].category }}</div>
-                        <h1 class="hero-title">{{ articles[0].title }}</h1>
-                        <p class="hero-excerpt">Ανακαλύψτε τις πιο έξυπνες και ενημερωμένες λύσεις για την καθημερινότητά σας. Διαβάστε την πλήρη ανάλυση και δείτε γιατί αυτή η επιλογή ξεχωρίζει.</p>
-                        <div class="card-date">{{ articles[0].date }}</div>
+                        <div class="badge">{{ posts[0].category }}</div>
+                        <h1 class="hero-title">{{ posts[0].title }}</h1>
+                        <p class="hero-excerpt">{{ posts[0].short_summary }}</p>
+                        <div class="card-date">{{ posts[0].date }}</div>
                     </div>
                 </a>
             </div>
@@ -41,20 +43,20 @@
         {% endif %}
 
         <div class="container">
-            <h2 class="section-title">Όλα τα Άρθρα</h2>
+            <h2 class="section-title">Κορυφαίοι Οδηγοί Αγοράς</h2>
             <div class="grid">
-                {% for article in articles[1:] if articles|length > 1 %}
-                <a href="{{ article_url_prefix }}{{ article.url }}" class="card">
+                {% for post in posts %}
+                <a href="{{ post.url }}" class="card">
                     <div class="card-img-wrap">
-                        <img src="{{ article.image_url }}" alt="{{ article.title }}">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}">
+                        {% if post.type == 'discovery' %}
+                        <div class="discovery-label">ΟΔΗΓΟΣ</div>
+                        {% endif %}
                     </div>
                     <div class="card-content">
-                        <div class="badge-small">{{ article.category }}</div>
-                        <div class="card-date">{{ article.date }}</div>
-                        <h3 class="card-title">
-                            {% if article.type == 'discovery' %}<span style="color: var(--accent);">[Discovery]</span> {% endif %}
-                            {{ article.title }}
-                        </h3>
+                        <div class="badge-small">{{ post.category }}</div>
+                        <div class="card-date">{{ post.date }}</div>
+                        <h3 class="card-title">{{ post.title }}</h3>
                     </div>
                 </a>
                 {% endfor %}

@@ -149,7 +149,8 @@ def build_site():
                     'date': post['date'],
                     'category': category,
                     'image_url': image_url,
-                    'type': page_type
+                    'type': page_type,
+                    'short_summary': post.get('short_summary', '')
                 })
             except Exception as e:
                 print(f"Error processing {filename}: {e}")
@@ -164,7 +165,7 @@ def build_site():
         cat_articles = [a for a in articles if a['category'] == cat['name']]
         
         cat_index_html = index_template.render(
-            articles=cat_articles,
+            posts=cat_articles,
             site_name=f"{cat['name']} - {config['site']['name']}",
             description=f"Διαβάστε τα καλύτερα άρθρα για {cat['name']}",
             site_url=config['site']['url'],
@@ -180,7 +181,7 @@ def build_site():
 
     # Generate Main Index
     index_html = index_template.render(
-        articles=articles,
+        posts=articles,
         site_name=config['site']['name'],
         description=config['site']['description'],
         site_url=config['site']['url'],
