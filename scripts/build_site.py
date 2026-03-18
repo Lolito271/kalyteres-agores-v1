@@ -42,6 +42,19 @@ def build_site():
     else:
         os.makedirs("public")
     
+    # Image Fallbacks
+    IMAGE_FALLBACKS = {
+        'Έξυπνο Σπίτι': 'https://images.unsplash.com/photo-1558002038-103792e17734?q=80&w=1600',
+        'Gadgets & Τεχνολογία': 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600',
+        'Υγεία & Ευεξία': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600',
+        'Σπίτι & Κήπος': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1600',
+        'default': 'https://images.unsplash.com/photo-1510033331526-dca71429074b?q=80&w=1600'
+    }
+
+    # Approved Categories
+    target_categories_names = config['content'].get('target_categories', [])
+    approved_cats = set(target_categories_names)
+    
     # Copy Assets
     if os.path.exists("assets"):
         shutil.copytree("assets", "public/assets", dirs_exist_ok=True)
@@ -69,12 +82,17 @@ def build_site():
     for filename in os.listdir(content_dir):
         if filename.endswith(".md"):
             try:
-                post = frontmatter.load(os.path.join(content_dir, filename))
+                with open(os.path.join(content_dir, filename), "r", encoding="utf-8") as f:
+                    post = frontmatter.load(f)
                 
                 # Convert markdown to HTML
                 html_content = markdown.markdown(post.content)
                 
                 category = post.get('category', 'Γενικά')
+                if category not in approved_cats:
+                    print(f"Skipping {filename}: Category '{category}' not in approved list.")
+                    continue
+
                 cat_slug = slugify(category)
                 
                 # Create category directory
@@ -82,6 +100,11 @@ def build_site():
                 if not os.path.exists(cat_dir):
                     os.makedirs(cat_dir)
                 
+                # Image Logic
+                image_url = post.get('image_url')
+                if not image_url or image_url.strip() == "":
+                    image_url = IMAGE_FALLBACKS.get(category, IMAGE_FALLBACKS['default'])
+
                 # Article URL
                 article_slug = filename.replace(".md", "")
                 output_name = f"{article_slug}.html"
@@ -98,7 +121,7 @@ def build_site():
                     title=post['title'],
                     date=post['date'],
                     category=category,
-                    image_url=post.get('image_url', ''),
+                    image_url=image_url,
                     content=html_content,
                     # Discovery specific data
                     type=page_type,
@@ -125,7 +148,7 @@ def build_site():
                     'url': relative_url,
                     'date': post['date'],
                     'category': category,
-                    'image_url': post.get('image_url', ''),
+                    'image_url': image_url,
                     'type': page_type
                 })
             except Exception as e:

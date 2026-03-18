@@ -427,10 +427,7 @@ content:
   - Έξυπνο Σπίτι
   - Gadgets & Τεχνολογία
   - Υγεία & Ευεξία
-  - Αθλητισμός
   - Σπίτι & Κήπος
-  - Αυτοκίνητο
-  - Lifestyle & Μόδα
   articles_per_day: 2
 ai:
   provider: google

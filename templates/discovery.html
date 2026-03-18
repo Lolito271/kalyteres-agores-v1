@@ -129,7 +129,13 @@
                 </div>
                 <div style="display: flex; align-items: center; gap: 20px;">
                      <div class="price-badge" style="font-weight: 800; color: var(--primary); background: #e2e8f0; padding: 10px 15px; border-radius: 10px;">{{ product.price_range }}</div>
-                     <a href="{{ product.affiliate_url }}" class="affiliate-link" style="margin: 0; flex-grow: 1; text-align: center;">Δείτε το στο {{ product.retailer }}</a>
+                     <a href="{{ product.affiliate_url }}" class="affiliate-link" style="margin: 0; flex-grow: 1; text-align: center;">
+                        {% if product.link_type == 'product' %}
+                            Αγορά από το {{ product.retailer }}
+                        {% else %}
+                            Δείτε παρόμοια στο {{ product.retailer }}
+                        {% endif %}
+                     </a>
                 </div>
             </div>
         </div>
