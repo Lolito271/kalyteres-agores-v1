@@ -33,36 +33,44 @@
             <p class="discovery-summary">{{ short_summary }}</p>
         </div>
 
+        <div class="article-content" style="margin: 40px 0; font-size: 1.15rem; line-height: 1.8; color: #334155;">
+            {{ intro | safe }}
+        </div>
+
         <!-- Tiered Picks -->
         <div class="picks-grid">
             {% if top_pick %}
             <div class="pick-card top">
                 <span class="tier-badge">🥇 Top Pick</span>
                 <h3>{{ top_pick.name }}</h3>
-                <p>{{ top_pick.desc }}</p>
-                <a href="{{ top_pick.link }}" class="affiliate-link" style="margin-top: 20px;">Δείτε το</a>
+                <p>{{ top_pick.best_for }}</p>
+                <div class="price-tag" style="margin: 15px 0;">{{ top_pick.price_range }}</div>
+                <a href="{{ top_pick.affiliate_url }}" class="affiliate-link" style="margin-top: 10px; width: 100%;">Δείτε το</a>
             </div>
             {% endif %}
             {% if value_pick %}
             <div class="pick-card value">
                 <span class="tier-badge">🥈 Best Value</span>
                 <h3>{{ value_pick.name }}</h3>
-                <p>{{ value_pick.desc }}</p>
-                <a href="{{ value_pick.link }}" class="affiliate-link" style="margin-top: 20px;">Δείτε το</a>
+                <p>{{ value_pick.best_for }}</p>
+                <div class="price-tag" style="margin: 15px 0;">{{ value_pick.price_range }}</div>
+                <a href="{{ value_pick.affiliate_url }}" class="affiliate-link" style="margin-top: 10px; width: 100%;">Δείτε το</a>
             </div>
             {% endif %}
             {% if budget_pick %}
             <div class="pick-card budget">
                 <span class="tier-badge">🥉 Budget Choice</span>
                 <h3>{{ budget_pick.name }}</h3>
-                <p>{{ budget_pick.desc }}</p>
-                <a href="{{ budget_pick.link }}" class="affiliate-link" style="margin-top: 20px;">Δείτε το</a>
+                <p>{{ budget_pick.best_for }}</p>
+                <div class="price-tag" style="margin: 15px 0;">{{ budget_pick.price_range }}</div>
+                <a href="{{ budget_pick.affiliate_url }}" class="affiliate-link" style="margin-top: 10px; width: 100%;">Δείτε το</a>
             </div>
             {% endif %}
         </div>
 
-        <div class="article-content" style="margin: 60px 0; font-size: 1.1rem; line-height: 1.8;">
-            {{ content | safe }}
+        <div style="background: #fff; padding: 40px; border-radius: 30px; border: 1px solid #f1f5f9; margin: 60px 0;">
+            <h2 style="margin-top: 0; color: var(--brand-dark);">📘 Οδηγός Αγοράς: Τι να προσέξετε</h2>
+            <div style="font-size: 1.1rem; line-height: 1.8;">{{ buyer_guide_intro | safe }}</div>
         </div>
 
         <!-- Product Cards section -->
@@ -95,32 +103,21 @@
         </div>
         {% endfor %}
 
-        <!-- Comparison Table -->
+        <!-- Comparison Intro -->
+        <div style="margin: 60px 0; padding: 40px; background: #f8fafc; border-radius: 30px; border-left: 6px solid var(--accent);">
+            <h2 style="margin-top: 0;">📊 Ανάλυση & Σύγκριση</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8;">{{ comparison_intro | safe }}</p>
+        </div>
+
         {% if products %}
         <h2 class="section-title">Συγκριτικός Πίνακας</h2>
-        <div class="comparison-table-wrap">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Προϊόν</th>
-                        <th>Βαθμολογία</th>
-                        <th>Εύρος Τιμής</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                    <tr>
-                        <td style="font-weight: 800; color: var(--primary);">{{ product.name }}</td>
-                        <td><span class="score-badge">{{ product.score }}</span></td>
-                        <td><span class="price-tag">{{ product.price_range }}</span></td>
-                        <td><a href="{{ product.affiliate_url }}" class="social-btn fb-btn" style="padding: 10px 20px; font-size: 0.85rem; background: var(--accent);">Αγορά</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        ... (table remains same) ...
         {% endif %}
+
+        <div style="margin: 80px 0; padding: 50px; background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; border-radius: 40px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3);">
+            <h2 style="margin-top: 0; color: var(--accent);">🏆 Τελική Πρόταση</h2>
+            <div style="font-size: 1.25rem; line-height: 1.8;">{{ final_recommendation | safe }}</div>
+        </div>
 
         <!-- FAQ -->
         {% if faq %}

@@ -136,6 +136,10 @@ def build_site():
                     # Discovery specific data
                     type=page_type,
                     short_summary=post.get('short_summary', ''),
+                    intro=post.get('intro', ''),
+                    buyer_guide_intro=post.get('buyer_guide_intro', ''),
+                    comparison_intro=post.get('comparison_intro', ''),
+                    final_recommendation=post.get('final_recommendation', ''),
                     top_pick=post.get('top_pick'),
                     value_pick=post.get('value_pick'),
                     budget_pick=post.get('budget_pick'),
