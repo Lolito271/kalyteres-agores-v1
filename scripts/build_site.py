@@ -7,7 +7,7 @@ import re
 import shutil
 
 # Load configuration
-with open("config.yaml", "r", encoding="utf-8") as f:
+with open("config.yaml", "r", encoding="utf-8-sig") as f:
     config = yaml.safe_load(f)
 
 def slugify(text):
@@ -68,7 +68,13 @@ def build_site():
     
     # Prepare categories for navigation
     target_categories_names = config['content'].get('target_categories', [])
-    categories_list = [{'name': c, 'url': f"/{slugify(c)}/"} for c in target_categories_names]
+    categories_list = []
+    approved_cats_slugs = set()
+    for c in target_categories_names:
+        c_name = str(c).strip()
+        c_slug = slugify(c_name)
+        categories_list.append({'name': c_name, 'url': f"/{c_slug}/", 'slug': c_slug})
+        approved_cats_slugs.add(c_slug)
 
     # Process each markdown file in content/
     articles = []
@@ -82,15 +88,19 @@ def build_site():
     for filename in os.listdir(content_dir):
         if filename.endswith(".md"):
             try:
-                with open(os.path.join(content_dir, filename), "r", encoding="utf-8") as f:
+                with open(os.path.join(content_dir, filename), "r", encoding="utf-8-sig") as f:
                     post = frontmatter.load(f)
+                
+                # Clean up metadata
+                title = str(post.get('title', '')).strip()
+                category = str(post.get('category', 'Γενικά')).strip()
+                cat_slug = slugify(category)
                 
                 # Convert markdown to HTML
                 html_content = markdown.markdown(post.content)
                 
-                category = post.get('category', 'Γενικά')
-                if category not in approved_cats:
-                    print(f"Skipping {filename}: Category '{category}' not in approved list.")
+                if cat_slug not in approved_cats_slugs:
+                    print(f"Skipping {filename}: Category '{category}' (slug: {cat_slug}) not in approved list.")
                     continue
 
                 cat_slug = slugify(category)
@@ -118,7 +128,7 @@ def build_site():
                     active_template = env.get_template('article.html')
                 
                 final_html = active_template.render(
-                    title=post['title'],
+                    title=title,
                     date=post['date'],
                     category=category,
                     image_url=image_url,
@@ -144,7 +154,7 @@ def build_site():
                     f.write(final_html)
                 
                 articles.append({
-                    'title': post['title'],
+                    'title': title,
                     'url': relative_url,
                     'date': post['date'],
                     'category': category,
